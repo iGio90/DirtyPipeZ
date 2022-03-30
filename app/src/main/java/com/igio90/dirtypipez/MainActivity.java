@@ -2,7 +2,6 @@ package com.igio90.dirtypipez;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -15,30 +14,6 @@ public class MainActivity extends Activity {
 
     static {
         System.loadLibrary("dirtypipez");
-    }
-
-    private File extractAsset(String name) {
-        AssetManager assetManager = getAssets();
-
-        InputStream in;
-        OutputStream out;
-        File dest = new File(getFilesDir().getParentFile(), name);
-
-        try {
-            in = assetManager.open(name);
-            out = new FileOutputStream(dest);
-
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            out.flush();
-            out.close();
-        } catch (Exception ignored) {}
-
-        return dest;
     }
 
     @Override
